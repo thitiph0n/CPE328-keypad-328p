@@ -95,6 +95,22 @@ void TIMER0_Init(uint8_t count, uint8_t dim) {
     OCR0B = dim;
 }
 
+void LED() {
+    unsigned char level;
+    cli();
+    level = USART_Receive();
+    if (level == '0') {
+        TIMER0_Init(31, 0);
+    } else if (level == '1') {
+        TIMER0_Init(31, 10);
+    } else if (level == '2') {
+        TIMER0_Init(31, 20);
+    } else if (level == '3') {
+        TIMER0_Init(31, 31);
+    }
+    sei();
+}
+
 ISR(PCINT0_vect) {
     uint8_t row = 0, column = 0;
     holdedKey = 0;
@@ -163,15 +179,7 @@ int main(void) {
                 }
                 // LED light
                 if (usart_data == 'l') {
-                    unsigned char level;
-                    cli();
-                    level = USART_Receive();
-                    if (level == '0') {
-                        TIMER0_Init(31, 0);
-                    } else if (level == '1') {
-                        TIMER0_Init(31, 31);
-                    }
-                    sei();
+                    LED();
                 }
                 
                 //Send 'q' to exit to default mode
@@ -190,18 +198,13 @@ int main(void) {
             }
             pressedKey = 0;
             usart_data = '\0';
-        }            //LED light
+        }   
+        //LED light
         else if (usart_data == 'l') {
-            unsigned char level;
-            cli();
-            level = USART_Receive();
-            if (level == '0') {
-                TIMER0_Init(31, 0);
-            } else if (level == '1') {
-                TIMER0_Init(31, 31);
-            }
+            LED();
             usart_data = '\0';
-        }            // Default mode
+        }            
+        // Default mode
         else {
 
             //Transmit to USART
