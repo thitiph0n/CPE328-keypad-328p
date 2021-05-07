@@ -6,7 +6,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-volatile uint8_t keys[4][4] = {
+uint8_t keys[4][4] = {
     {0x37, 0x38, 0x39, 0x41},
     {0x34, 0x35, 0x36, 0x42},
     {0x31, 0x32, 0x33, 0x43},
@@ -50,6 +50,13 @@ void USART_Transmit_String(unsigned char s[]) {
 
 }
 
+unsigned char USART_Receive() {
+    /* Wait for data to be received */
+    while (!(UCSR0A & (1 << RXC0)));
+    /* Get and return received data from buffer */
+    return UDR0;
+}
+
 void push(uint8_t data) {
     if (count < SIZE) {
         queue[count] = data;
@@ -90,6 +97,7 @@ void TIMER0_Init(uint8_t count, uint8_t dim) {
 
 ISR(PCINT0_vect) {
     uint8_t row = 0, column = 0;
+    holdedKey = 0;
     for (row = 0; row < 4; row++) {
         for (column = 0; column < 4; column++) {
             if (!((PINB & (1 << row)) | (PINC & (1 << column)))) {
@@ -98,12 +106,12 @@ ISR(PCINT0_vect) {
                 while (!(PINB & (1 << row))) {
                     timer++; // count how long button is pressed
                     _delay_ms(1);
-                    if(timer > 2000UL){
+                    if (timer > 500UL) {
                         break;
                     }
                 };
                 if (timer > BTN_DEBOUCE) { // software debouncing button
-                    if (timer < 500UL) {//unsigned long
+                    if (timer < 450UL) {//unsigned long
                         //single click
                         push(keys[column][row]);
                         pressedKey = keys[column][row];
@@ -124,30 +132,27 @@ ISR(USART_RX_vect) {
     usart_data = UDR0;
 }
 
-
-
 int main(void) {
-    
+
     pin_change_init();
     USART_Init(51);
-    
+
     DDRB = 0x00;
     DDRC = 0x00;
-    
-    sei();
 
     DDRD |= (1 << DDD5);
     PORTD &= ~(1 << PORTD5);
-    
-    TIMER0_Init(31, 31);
-    
+
+    TIMER0_Init(31, 0);
+
     while (1) {
+        sei();
         uint8_t i;
-        // Get buffer
+        // Get buffer mode
         if (usart_data == 'b') {
             send_buffer();
             usart_data = '\0';
-        }// Get current key status
+        }            // Get current key status mode
         else if (usart_data == 's') {
             usart_data = 0;
             while (usart_data != 'q') {
@@ -156,8 +161,22 @@ int main(void) {
                     _delay_ms(20);
                     DDRC ^= (1 << i);
                 }
+                // LED light
+                if (usart_data == 'l') {
+                    unsigned char level;
+                    cli();
+                    level = USART_Receive();
+                    if (level == '0') {
+                        TIMER0_Init(31, 0);
+                    } else if (level == '1') {
+                        TIMER0_Init(31, 31);
+                    }
+                    sei();
+                }
+                
+                //Send 'q' to exit to default mode
                 if (usart_data != 0 && usart_data != 'q') {
-
+                    
                     if (usart_data == pressedKey) {
                         USART_Transmit('p');
                     } else {
@@ -165,17 +184,33 @@ int main(void) {
                     }
                     usart_data = 0;
                 }
-                if (holdedKey == 0) {
+                if (holdedKey != -1) {
                     pressedKey = 0;
                 }
             }
             pressedKey = 0;
             usart_data = '\0';
-        } else {
-            if (pressedKey != 0) {
+        }            //LED light
+        else if (usart_data == 'l') {
+            unsigned char level;
+            cli();
+            level = USART_Receive();
+            if (level == '0') {
+                TIMER0_Init(31, 0);
+            } else if (level == '1') {
+                TIMER0_Init(31, 31);
+            }
+            usart_data = '\0';
+        }            // Default mode
+        else {
+
+            //Transmit to USART
+            if (pressedKey != 0 && holdedKey == 0) {
                 USART_Transmit(pressedKey);
             }
             pressedKey = 0;
+
+            //Loop matrix button
             for (i = 0; i < 4; i++) {
                 DDRC ^= (1 << i);
                 _delay_ms(10);

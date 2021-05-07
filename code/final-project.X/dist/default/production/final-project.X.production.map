@@ -363,41 +363,41 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x68
+.debug_aranges  0x0000000000000000       0x70
  *(.debug_aranges)
  .debug_aranges
-                0x0000000000000000       0x68 build/default/production/main.o
+                0x0000000000000000       0x70 build/default/production/main.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xd67
+.debug_info     0x0000000000000000      0xe27
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x773 build/default/production/main.o
+ .debug_info    0x00000000000005f4      0x833 build/default/production/main.o
 
-.debug_abbrev   0x0000000000000000      0x767
+.debug_abbrev   0x0000000000000000      0x788
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2      0x1c5 build/default/production/main.o
+ .debug_abbrev  0x00000000000005a2      0x1e6 build/default/production/main.o
 
-.debug_line     0x0000000000000000      0x4f4
+.debug_line     0x0000000000000000      0x5a0
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0x3bd build/default/production/main.o
+ .debug_line    0x0000000000000137      0x469 build/default/production/main.o
 
-.debug_frame    0x0000000000000000      0x178
+.debug_frame    0x0000000000000000      0x17c
  *(.debug_frame)
- .debug_frame   0x0000000000000000      0x178 build/default/production/main.o
+ .debug_frame   0x0000000000000000      0x17c build/default/production/main.o
 
 .debug_str      0x0000000000000000      0x208
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  .debug_str     0x0000000000000208        0x0 build/default/production/main.o
 
-.debug_loc      0x0000000000000000      0x341
+.debug_loc      0x0000000000000000      0x359
  *(.debug_loc)
- .debug_loc     0x0000000000000000      0x341 build/default/production/main.o
+ .debug_loc     0x0000000000000000      0x359 build/default/production/main.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -417,9 +417,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x70
+.debug_ranges   0x0000000000000000       0x90
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x70 build/default/production/main.o
+ .debug_ranges  0x0000000000000000       0x90 build/default/production/main.o
 
 .debug_macro
  *(.debug_macro)
@@ -451,88 +451,94 @@ LOAD data_init
  .progmemx.data
                 0x00000000000000ce        0x9 build/default/production/main.o
 
-.text.__vector_3
-                0x00000000000000d8      0x15c
- .text.__vector_3
-                0x00000000000000d8      0x15c build/default/production/main.o
-                0x00000000000000d8                __vector_3
+.text.main      0x00000000000000d8      0x17a
+ .text.main     0x00000000000000d8      0x17a build/default/production/main.o
+                0x00000000000000d8                main
 
-.text.main      0x0000000000000234      0x112
- .text.main     0x0000000000000234      0x112 build/default/production/main.o
-                0x0000000000000234                main
+.text.__vector_3
+                0x0000000000000252      0x13c
+ .text.__vector_3
+                0x0000000000000252      0x13c build/default/production/main.o
+                0x0000000000000252                __vector_3
 
 .text.send_buffer
-                0x0000000000000346       0xac
+                0x000000000000038e       0xac
  .text.send_buffer
-                0x0000000000000346       0xac build/default/production/main.o
-                0x0000000000000346                send_buffer
+                0x000000000000038e       0xac build/default/production/main.o
+                0x000000000000038e                send_buffer
 
-.text.push      0x00000000000003f2       0x5e
- .text.push     0x00000000000003f2       0x5e build/default/production/main.o
-                0x00000000000003f2                push
+.text.push      0x000000000000043a       0x5e
+ .text.push     0x000000000000043a       0x5e build/default/production/main.o
+                0x000000000000043a                push
 
 .text.__vector_18
-                0x0000000000000450       0x20
+                0x0000000000000498       0x20
  .text.__vector_18
-                0x0000000000000450       0x20 build/default/production/main.o
-                0x0000000000000450                __vector_18
+                0x0000000000000498       0x20 build/default/production/main.o
+                0x0000000000000498                __vector_18
 
 .text.USART_Init
-                0x0000000000000470       0x1e
+                0x00000000000004b8       0x1e
  .text.USART_Init
-                0x0000000000000470       0x1e build/default/production/main.o
-                0x0000000000000470                USART_Init
+                0x00000000000004b8       0x1e build/default/production/main.o
+                0x00000000000004b8                USART_Init
 
-.text.libgcc    0x000000000000048e       0x1a
- .text.libgcc   0x000000000000048e       0x1a c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const\libgcc.a(_movmemx.o)
-                0x000000000000048e                __movmemx_qi
-                0x0000000000000490                __movmemx_hi
+.text.libgcc    0x00000000000004d6       0x1a
+ .text.libgcc   0x00000000000004d6       0x1a c:/program files/microchip/xc8/v2.31/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const\libgcc.a(_movmemx.o)
+                0x00000000000004d6                __movmemx_qi
+                0x00000000000004d8                __movmemx_hi
 
 .text.pin_change_init
-                0x00000000000004a8       0x16
+                0x00000000000004f0       0x16
  .text.pin_change_init
-                0x00000000000004a8       0x16 build/default/production/main.o
-                0x00000000000004a8                pin_change_init
+                0x00000000000004f0       0x16 build/default/production/main.o
+                0x00000000000004f0                pin_change_init
 
 .text.TIMER0_Init
-                0x00000000000004be       0x12
+                0x0000000000000506       0x12
  .text.TIMER0_Init
-                0x00000000000004be       0x12 build/default/production/main.o
-                0x00000000000004be                TIMER0_Init
+                0x0000000000000506       0x12 build/default/production/main.o
+                0x0000000000000506                TIMER0_Init
 
 .text.USART_Transmit
-                0x00000000000004d0       0x10
+                0x0000000000000518       0x10
  .text.USART_Transmit
-                0x00000000000004d0       0x10 build/default/production/main.o
-                0x00000000000004d0                USART_Transmit
+                0x0000000000000518       0x10 build/default/production/main.o
+                0x0000000000000518                USART_Transmit
 
-.text           0x00000000000004e0        0x4
- .text          0x00000000000004e0        0x4 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x00000000000004e0                __vector_22
-                0x00000000000004e0                __vector_1
-                0x00000000000004e0                __vector_24
-                0x00000000000004e0                __vector_12
-                0x00000000000004e0                __bad_interrupt
-                0x00000000000004e0                __vector_6
-                0x00000000000004e0                __vector_23
-                0x00000000000004e0                __vector_25
-                0x00000000000004e0                __vector_11
-                0x00000000000004e0                __vector_13
-                0x00000000000004e0                __vector_17
-                0x00000000000004e0                __vector_19
-                0x00000000000004e0                __vector_7
-                0x00000000000004e0                __vector_5
-                0x00000000000004e0                __vector_4
-                0x00000000000004e0                __vector_9
-                0x00000000000004e0                __vector_2
-                0x00000000000004e0                __vector_21
-                0x00000000000004e0                __vector_15
-                0x00000000000004e0                __vector_8
-                0x00000000000004e0                __vector_14
-                0x00000000000004e0                __vector_10
-                0x00000000000004e0                __vector_16
-                0x00000000000004e0                __vector_20
+.text.USART_Receive
+                0x0000000000000528       0x10
+ .text.USART_Receive
+                0x0000000000000528       0x10 build/default/production/main.o
+                0x0000000000000528                USART_Receive
 
-.data.keys      0x0000000000800121       0x10 load address 0x00000000000004e4
+.text           0x0000000000000538        0x4
+ .text          0x0000000000000538        0x4 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/ATmega_DFP/2.2.108/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x0000000000000538                __vector_22
+                0x0000000000000538                __vector_1
+                0x0000000000000538                __vector_24
+                0x0000000000000538                __vector_12
+                0x0000000000000538                __bad_interrupt
+                0x0000000000000538                __vector_6
+                0x0000000000000538                __vector_23
+                0x0000000000000538                __vector_25
+                0x0000000000000538                __vector_11
+                0x0000000000000538                __vector_13
+                0x0000000000000538                __vector_17
+                0x0000000000000538                __vector_19
+                0x0000000000000538                __vector_7
+                0x0000000000000538                __vector_5
+                0x0000000000000538                __vector_4
+                0x0000000000000538                __vector_9
+                0x0000000000000538                __vector_2
+                0x0000000000000538                __vector_21
+                0x0000000000000538                __vector_15
+                0x0000000000000538                __vector_8
+                0x0000000000000538                __vector_14
+                0x0000000000000538                __vector_10
+                0x0000000000000538                __vector_16
+                0x0000000000000538                __vector_20
+
+.data.keys      0x0000000000800121       0x10 load address 0x000000000000053c
  .data.keys     0x0000000000800121       0x10 build/default/production/main.o
                 0x0000000000800121                keys
