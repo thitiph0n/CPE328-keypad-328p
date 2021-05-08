@@ -180,6 +180,7 @@ int main(void) {
                 // LED light
                 if (usart_data == 'l') {
                     LED();
+                    usart_data = '\0';
                 }
                 
                 //Send 'q' to exit to default mode
